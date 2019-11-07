@@ -1,0 +1,12 @@
+fullnameOverride: redis
+usePassword: true
+usePasswordFile: true
+existingSecret: redis-password-file
+metrics:
+    enabled: true
+cluster:
+    slaveCount: 3
+master:
+    disableCommands: []
+slave:
+    disableCommands: []

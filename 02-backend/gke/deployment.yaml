@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/istio-workshop-xyz/02-backend@sha256:f506d816e697aff0efbc6c82389d0383b73e7aa65b935d0ac09b1473500c92d8
+        ports:
+        - containerPort: 8080
+        env:
+        - name: mysql_username
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: mysql_password
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+        - name: redis_password
+          valueFrom:
+            secretKeyRef:
+              name: redis-password-file
+              key: redis-password
+        - name: elastic_password
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-es-elastic-user
+              key: elastic

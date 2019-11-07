@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/istio-workshop-xyz/01-frontend@sha256:33df80174e195aa46ad9c7ac245bb2307e2892a6ff1618819876fa5a276133f0
+        ports:
+        - containerPort: 8080

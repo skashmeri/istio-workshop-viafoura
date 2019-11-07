@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+  labels:
+    app: loadgen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loadgen
+  template:
+    metadata:
+      labels:
+        app: loadgen
+    spec:
+      containers:
+      - name: loadgen
+        image: gcr.io/istio-workshop-xyz/00-loadgen@sha256:a9ebeb50bff5419ee75a9498475ffd14dd6267bf792a8d316c19efaad9f5f91e
+        ports:
+        - containerPort: 8080
